@@ -1,0 +1,37 @@
+package codigo;
+
+import java_cup.runtime.*;
+
+parser code{:
+public void syntax_error(Symbol s){
+    report_error("Error de sintaxis en linea " + s.left, null);
+}
+public void unrecovered_syntax_error(Symbol s) throws
+    java.lang.Exception{
+    report_fatal_error("",null);
+}
+:};
+//codigo original
+parser code
+{:
+public Symbol s;
+
+private void syntax_ERROR(Symbol s){
+    this.s=s;
+}
+private Symbol getS(){
+    return this.s;
+}
+:};
+
+non terminal S,X;
+terminal tipo,identificador,coma,puntoycoma,espacio;
+start with S;
+S ::= tipo espacio identificador puntoycoma|tipo espacio identificador 
+      coma X puntoycoma;
+X ::= identificador X | coma identificador X | ;
+
+
+
+
+
